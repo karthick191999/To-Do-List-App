@@ -1,8 +1,10 @@
 package com.example.karthik.remainder;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.icu.text.NumberFormat;
 import android.icu.util.Calendar;
@@ -106,9 +108,15 @@ public class FragmentDoctor1 extends android.app.Fragment {
         timeL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar mCalendar = Calendar.getInstance();
                 final String[] amPm = new String[1];
                 int minute = calendar.get(Calendar.MINUTE);
                 int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                mCalendar.set(Calendar.HOUR_OF_DAY,hour);
+                mCalendar.set(Calendar.MINUTE,minute);
+                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+
+
                 TimePickerDialog dialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

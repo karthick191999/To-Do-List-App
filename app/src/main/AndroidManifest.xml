@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DoctorActivity" />
-        <activity android:name=".Input"></activity>
+        <activity android:name=".Input" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

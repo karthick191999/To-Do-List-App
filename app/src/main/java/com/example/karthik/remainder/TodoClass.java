@@ -6,17 +6,27 @@ package com.example.karthik.remainder;
 
 public class TodoClass {
     String task;
+    int id;
     String date;
     String time;
 
-    public TodoClass(String task, String date, String time) {
+    public TodoClass(int id, String task, String date, String time) {
         this.task = task;
         this.date = date;
         this.time = time;
+        this.id = id;
     }
 
     public String getTask() {
         return task;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTask(String task) {

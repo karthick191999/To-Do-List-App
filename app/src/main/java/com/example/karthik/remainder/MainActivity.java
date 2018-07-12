@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,9 +14,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +30,27 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     Button button;
     TabLayout tab;
+    FloatingActionButton fab;
     EditText edit;
     ViewPager viewPager;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.search) {
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return true;
+    }
+
     TextWatcher tw = new TextWatcher() {
 
         @Override
@@ -66,15 +91,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("DashBoard");
         viewPager = (ViewPager) findViewById(R.id.myPager);
-        edit = (EditText) findViewById(R.id.tryC);
-        edit.addTextChangedListener(tw);
+        //edit = (EditText) findViewById(R.id.tryC);
+        //edit.addTextChangedListener(tw);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         tab = (TabLayout) findViewById(R.id.tabs);
         MyPager pager = new MyPager(getSupportFragmentManager());
         viewPager.setAdapter(pager);
         tab.setupWithViewPager(viewPager);
-        button = (Button) findViewById(R.id.fragAdd);
-        button.setOnClickListener(new View.OnClickListener() {
+        //button = (Button) findViewById(R.id.fragAdd);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Input.class);
@@ -106,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            Log.d("Position", String.valueOf(position));
             if (position == 0)
                 return new FragmentA();
             if (position == 1)

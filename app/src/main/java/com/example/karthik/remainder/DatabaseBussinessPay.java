@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 /**
  * Created by karthik on 09-07-2018.
@@ -52,5 +54,10 @@ public class DatabaseBussinessPay extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("Select * from "+table_name+"",null);
         return cursor;
     }
-
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public Cursor searchData(String s) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + table_name + " where " + Col2 + "=?", new String[]{s}, null);
+        return cursor;
+    }
 }

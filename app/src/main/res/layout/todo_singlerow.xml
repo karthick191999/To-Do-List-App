@@ -1,23 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/my_shape_blue"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/listTodoTask"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/listTodoDate"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_toRightOf="@+id/imageView3"
+        android:layout_toEndOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/listTodoTime"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
-</LinearLayout>
+        android:layout_alignLeft="@+id/listTodoTask"
+        android:layout_alignStart="@+id/listTodoTask"
+        android:layout_below="@+id/delete"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="31dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/trash"
+        android:scaleType="fitXY"
+        android:layout_alignTop="@+id/listTodoTask"
+        android:layout_toRightOf="@+id/listTodoDate"
+        android:layout_toEndOf="@+id/listTodoDate"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        app:srcCompat="@drawable/calendar"
+        android:layout_alignTop="@+id/listTodoTime"
+        android:layout_toRightOf="@+id/listTodoTime"
+        android:layout_toEndOf="@+id/listTodoTime"
+        android:layout_marginStart="20dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_toLeftOf="@+id/listTodoTime"
+        android:layout_toStartOf="@+id/listTodoTime"
+        app:srcCompat="@drawable/clock" />
+</RelativeLayout>

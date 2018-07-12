@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,12 +30,14 @@ public class FragmentA extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_a, container, false);
         list = (ListView) view.findViewById(R.id.todo_list);
         database = new Database_Todo(getActivity());
+
         Cursor data = database.getData();
         while (data.moveToNext()) {
-            tlist.add(new TodoClass(data.getString(1), data.getString(2), data.getString(3)));
+            tlist.add(new TodoClass(data.getInt(0), data.getString(1), data.getString(2), data.getString(3)));
         }
         toDoAdapter adapter = new toDoAdapter(getActivity(), R.layout.todo_singlerow, tlist);
         list.setAdapter(adapter);
@@ -50,13 +53,23 @@ public class FragmentA extends android.support.v4.app.Fragment {
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            TodoClass todo = getItem(position);
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            final TodoClass todo = getItem(position);
             View row = convertView;
             if (row == null) {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 row = inflater.inflate(R.layout.todo_singlerow, parent, false);
             }
+            ImageButton delete = (ImageButton) row.findViewById(R.id.delete);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int id = todo.getId();
+                    database.deleteData(id);
+                    tlist.remove(position);
+                    notifyDataSetChanged();
+                }
+            });
             TextView task, date, time;
             task = (TextView) row.findViewById(R.id.listTodoTask);
             date = (TextView) row.findViewById(R.id.listTodoDate);
@@ -66,6 +79,7 @@ public class FragmentA extends android.support.v4.app.Fragment {
             time.setText(todo.getTime());
             return row;
         }
+
     }
 
 
