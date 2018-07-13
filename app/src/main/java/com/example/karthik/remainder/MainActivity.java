@@ -28,7 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    Button button;
+    Button button,exp;
     TabLayout tab;
     FloatingActionButton fab;
     EditText edit;
@@ -93,6 +93,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        exp = (Button) findViewById(R.id.expButton);
+        exp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ExpActivity.class);
+                startActivity(intent);
+            }
+        });
         getSupportActionBar().setTitle("DashBoard");
         viewPager = (ViewPager) findViewById(R.id.myPager);
         //edit = (EditText) findViewById(R.id.tryC);

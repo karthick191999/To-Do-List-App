@@ -26,6 +26,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import static com.example.karthik.remainder.Input.Idate;
+
 /**
  * Created by karthik on 03-07-2018.
  */
@@ -72,6 +74,7 @@ public class FragmentDoctor1 extends android.app.Fragment {
             }
         }
     };
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
     @Override
@@ -84,6 +87,18 @@ public class FragmentDoctor1 extends android.app.Fragment {
         date = (TextView) view.findViewById(R.id.date);
         name = (EditText) view.findViewById(R.id.businessInput);
         final Calendar calendar = Calendar.getInstance();
+        String rDate = Idate;
+        if (rDate != null) {
+            date.setText(rDate);
+        }
+        else {
+            int days = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
+            date.setText(days + "/" + month + "/" + year);
+        }
+
+
         paidL = (LinearLayout) view.findViewById(R.id.paidL);
         dueL = (LinearLayout) view.findViewById(R.id.dueL);
         timeL = (LinearLayout) view.findViewById(R.id.timeLayout);
@@ -112,8 +127,8 @@ public class FragmentDoctor1 extends android.app.Fragment {
                 final String[] amPm = new String[1];
                 int minute = calendar.get(Calendar.MINUTE);
                 int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                mCalendar.set(Calendar.HOUR_OF_DAY,hour);
-                mCalendar.set(Calendar.MINUTE,minute);
+                mCalendar.set(Calendar.HOUR_OF_DAY, hour);
+                mCalendar.set(Calendar.MINUTE, minute);
                 AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 
 
@@ -168,8 +183,6 @@ public class FragmentDoctor1 extends android.app.Fragment {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-
 
 
                         String string = editText.getText().toString();

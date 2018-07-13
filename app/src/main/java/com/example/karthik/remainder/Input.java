@@ -8,20 +8,26 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 public class Input extends AppCompatActivity {
+    public static String Idate;
     LinearLayout todo, buss;
     Toolbar toolbar;
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Idate = getIntent().getStringExtra("Date");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -67,6 +73,6 @@ public class Input extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(Input.this,MainActivity.class));
+        startActivity(new Intent(Input.this, MainActivity.class));
     }
 }
