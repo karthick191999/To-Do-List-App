@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
-    tools:context="com.example.karthik.remainder.Input">
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/newLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="130dp"
+        android:background="#9D7A9E">
 
         <EditText
             android:id="@+id/todoInput"
-            android:layout_width="342dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:hint="Name" />
 
-            android:inputType="textPersonName"
-            android:text="Name" />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/dateLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
         android:orientation="horizontal">
 
         <com.example.karthik.remainder.CircularImageView
 
-            android:id="@+id/imageView"
+            android:id="@+id/image"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
@@ -40,26 +39,30 @@
             app:srcCompat="@drawable/date1" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date deadline"
-            android:textSize="20sp" />
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/date"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="Date deadline"
+            android:text=""
             android:textSize="20sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/timelayout"
+        android:id="@+id/timeLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="250dp">
 
         <com.example.karthik.remainder.CircularImageView
 
@@ -70,28 +73,72 @@
             android:layout_marginRight="10dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/time" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time Deadline"
-            android:textSize="20sp" />
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="Date deadline"
+            android:text="00:00:00"
             android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkvImportant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Very Important" />
+
+        <CheckBox
+            android:id="@+id/checkImportant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Important" />
+
+        <CheckBox
+            android:id="@+id/checklImportant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Less Important" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/todoAdd"
 
+        android:id="@+id/todoAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="add" />
+        android:layout_marginTop="400dp"
+        android:text="Add" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:backgroundTint="#9D7A9E"
+        android:scaleType="fitXY"
+        android:src="@drawable/tick"
+        android:tint="#FFFFFF"
+        app:fabSize="normal"
+        app:layout_anchor="@id/newLayout"
+        app:layout_anchorGravity="bottom|end" />
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

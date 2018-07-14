@@ -10,6 +10,24 @@ public class BussinesspayClass {
     String time;
     String paid;
     String due;
+    int id;
+
+    public BussinesspayClass(String name, String date, String time, String paid, String due, int id) {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.paid = paid;
+        this.due = due;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -51,11 +69,5 @@ public class BussinesspayClass {
         this.due = due;
     }
 
-    public BussinesspayClass(String name, String date, String time, String paid, String due) {
-        this.name = name;
-        this.date = date;
-        this.time = time;
-        this.paid = paid;
-        this.due = due;
-    }
+
 }

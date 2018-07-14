@@ -20,7 +20,10 @@
         <activity android:name=".Input" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".ExpActivity" />
-        <activity android:name=".CalendarActivity"></activity>
+        <activity android:name=".CalendarActivity" />
+        <activity android:name=".DeleteActivity" />
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

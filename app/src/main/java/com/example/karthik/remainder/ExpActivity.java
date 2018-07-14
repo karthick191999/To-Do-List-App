@@ -49,12 +49,12 @@ public class ExpActivity extends AppCompatActivity {
         SimpleDateFormat month_date = new SimpleDateFormat("MMM");
         String month_name = month_date.format(calendar.getTime());
         String dayOfTheWeek = sdf.format(d);
-        textView.setText(dayOfTheWeek+","+month_name);
+        textView.setText(dayOfTheWeek + "," + month_name);
         imageView = (ImageView) header.findViewById(R.id.nav_header_imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ExpActivity.this,CalendarActivity.class);
+                Intent intent = new Intent(ExpActivity.this, CalendarActivity.class);
                 startActivity(intent);
                 Toast.makeText(ExpActivity.this, "Successful", Toast.LENGTH_LONG).show();
             }
@@ -62,6 +62,15 @@ public class ExpActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.nav_item_delete) {
+                    Intent intent = new Intent(ExpActivity.this, DeleteActivity.class);
+                    startActivity(intent);
+                }
+                if (id == R.id.nav_item_three) {
+                    Intent intent = new Intent(ExpActivity.this, Settings.class);
+                    startActivity(intent);
+                }
                 item.setChecked(true);
                 mDrawerLayout.closeDrawers();
                 return true;
@@ -84,4 +93,7 @@ public class ExpActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
+

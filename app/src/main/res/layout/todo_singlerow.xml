@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/my_shape_blue"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/my_new_shape"
     android:orientation="vertical">
 
     <TextView
@@ -24,14 +26,14 @@
         android:id="@+id/listTodoDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView3"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:layout_toRightOf="@+id/imageView3"
         android:text="TextView"
         android:textSize="20sp"
-        android:textStyle="italic"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_toRightOf="@+id/imageView3"
-        android:layout_toEndOf="@+id/imageView3" />
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/listTodoTime"
@@ -51,24 +53,24 @@
         android:id="@+id/delete"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/trash"
-        android:scaleType="fitXY"
+        android:layout_alignLeft="@+id/listTodoDate"
+        android:layout_alignStart="@+id/listTodoDate"
         android:layout_alignTop="@+id/listTodoTask"
-        android:layout_toRightOf="@+id/listTodoDate"
-        android:layout_toEndOf="@+id/listTodoDate"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp" />
+        android:layout_marginLeft="65dp"
+        android:layout_marginStart="65dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/trash" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
-        app:srcCompat="@drawable/calendar"
         android:layout_alignTop="@+id/listTodoTime"
-        android:layout_toRightOf="@+id/listTodoTime"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_toEndOf="@+id/listTodoTime"
-        android:layout_marginStart="20dp" />
+        android:layout_toRightOf="@+id/listTodoTime"
+        app:srcCompat="@drawable/calendar" />
 
     <ImageView
         android:id="@+id/imageView4"

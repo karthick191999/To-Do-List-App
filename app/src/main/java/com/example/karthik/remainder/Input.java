@@ -1,6 +1,7 @@
 package com.example.karthik.remainder;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -17,6 +19,7 @@ public class Input extends AppCompatActivity {
     public static String Idate;
     LinearLayout todo, buss;
     Toolbar toolbar;
+    Window window;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -27,7 +30,8 @@ public class Input extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Idate = getIntent().getStringExtra("Date");
-
+        window = getWindow();
+        window.setStatusBarColor(Color.parseColor("#A0B1BF"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
         toolbar = (Toolbar) findViewById(R.id.toolbar);

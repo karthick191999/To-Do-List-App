@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,16 +10,17 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
+        android:background="#045A70"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+            android:background="#045A70"
 
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways" />
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
@@ -29,28 +30,32 @@
             app:tabGravity="fill"
             app:tabMode="fixed" />
     </android.support.design.widget.AppBarLayout>
-
     <android.support.v4.view.ViewPager
         android:id="@+id/myPager"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="367dp">
+        android:layout_height="418dp"
+        android:layout_marginTop="90dp">
 
     </android.support.v4.view.ViewPager>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
+        app:layout_anchor="@id/myPager"
+        app:layout_anchorGravity="bottom|end"
         android:background="#FFFFFF"
         app:srcCompat="@android:drawable/ic_input_add"
         android:tint="@android:color/white" />
 
     <Button
         android:id="@+id/expButton"
+        android:layout_marginTop="530dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />
 
-</LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

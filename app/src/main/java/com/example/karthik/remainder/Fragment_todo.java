@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -33,6 +34,7 @@ public class Fragment_todo extends Fragment {
     String amPm;
     Database_Todo database;
     Button add;
+    CheckBox vimp, imp, limp;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
@@ -40,23 +42,25 @@ public class Fragment_todo extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_todo, container, false);
         final String rDate = Idate;
-
+        vimp = (CheckBox) view.findViewById(R.id.checkvImportant);
+        imp = (CheckBox) view.findViewById(R.id.checkImportant);
+        limp = (CheckBox) view.findViewById(R.id.checklImportant);
         date = (TextView) view.findViewById(R.id.date);
         time = (TextView) view.findViewById(R.id.time);
         database = new Database_Todo(getActivity());
         add = (Button) view.findViewById(R.id.todoAdd);
         calender = Calendar.getInstance();
-        if (rDate!=null){
+        if (rDate != null) {
             date.setText(rDate);
-        }
-        else {  int days = calender.get(Calendar.DAY_OF_MONTH);
+        } else {
+            int days = calender.get(Calendar.DAY_OF_MONTH);
             int month = calender.get(Calendar.MONTH);
             int year = calender.get(Calendar.YEAR);
             date.setText(days + "/" + month + "/" + year);
         }
 
         input = (EditText) view.findViewById(R.id.todoInput);
-        timeL = (LinearLayout) view.findViewById(R.id.timelayout);
+        timeL = (LinearLayout) view.findViewById(R.id.timeLayout);
         dateL = (LinearLayout) view.findViewById(R.id.dateLayout);
         timeL.setOnClickListener(new View.OnClickListener() {
             @Override
