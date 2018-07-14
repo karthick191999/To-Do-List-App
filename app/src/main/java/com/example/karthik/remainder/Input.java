@@ -21,6 +21,7 @@ public class Input extends AppCompatActivity {
     Toolbar toolbar;
     Window window;
 
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

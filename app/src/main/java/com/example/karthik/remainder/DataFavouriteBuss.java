@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 /**
  * Created by karthik on 13-07-2018.
@@ -56,7 +57,8 @@ public class DataFavouriteBuss extends SQLiteOpenHelper {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public boolean staring(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from " + table_name + " where " + Col1 + "=?", new String[]{String.valueOf(id)}, null);
+        Cursor cursor = db.rawQuery("Select * from " + table_name + " where " + Col1 + "=?", new String[]{Integer.toString(id)}, null);
+        Log.d("Inside Database", String.valueOf(cursor.getCount()));
         if (cursor.getCount() == 0)
             return false;
         else

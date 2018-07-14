@@ -47,13 +47,14 @@ public class FragmentB extends android.support.v4.app.Fragment {
         list.setAdapter(adapter);
         return view;
     }
-    boolean checked[] = new boolean[20];
+
+
     class bussinessAdapter extends ArrayAdapter<BussinesspayClass> {
         public bussinessAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<BussinesspayClass> objects) {
             super(context, resource, objects);
         }
 
-
+        boolean checked[] = new boolean[20];
 
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @NonNull
@@ -61,6 +62,7 @@ public class FragmentB extends android.support.v4.app.Fragment {
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             View row = convertView;
             final int[] flag = {0};
+            final int[] t = {0};
             final BussinesspayClass bvar = getItem(position);
             if (row == null) {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -68,12 +70,14 @@ public class FragmentB extends android.support.v4.app.Fragment {
             }
             final ImageView favImage = (ImageView) row.findViewById(R.id.favourite);
 
-Log.d("StringingFav", String.valueOf(favData.staring(bvar.getId())));
+            Log.d("StringingFav", String.valueOf(favData.staring(bvar.getId())));
 
             if (checked[position]) {
                 favImage.setImageResource(R.drawable.fav_yes);
-            } else
+            } else {
+                t[0] = 1;
                 favImage.setImageResource(R.drawable.fav_no);
+            }
             if (favData.staring(bvar.getId())) {
                 favImage.setImageResource(R.drawable.fav_yes);
                 checked[position] = true;
@@ -84,27 +88,42 @@ Log.d("StringingFav", String.valueOf(favData.staring(bvar.getId())));
                 public void onClick(View v) {
                     int id = bvar.getId();
                     if (checked[position]) {
+                        favData.deleteData(bvar.getId());
                         favImage.setImageResource(R.drawable.fav_no);
                         checked[position] = false;
                     } else {
+                        favData.addData(bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
                         favImage.setImageResource(R.drawable.fav_yes);
                         checked[position] = true;
-
+                        t[0] = 0;
                     }
                     if (favData.staring(id)) {
                         flag[0] = 1;
                     }
+                    Log.d("Value of flag", String.valueOf(flag[0]));
+                    if (flag[0] == 0) {
+                        Log.d("CHECKING T", String.valueOf(t[0]));
+
+                        if (t[0] == 0)
+                            favData.addData(bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
+
+                    }
                 }
             });
-
-            if (flag[0] == 1) {
+            Log.d("Value of flag outside", String.valueOf(flag[0]));
+           if (flag[0] == 1) {
                 favData.deleteData(bvar.getId());
-
                 flag[0] = 0;
-                Toast.makeText(getActivity(), "Favourite added", Toast.LENGTH_SHORT).show();
+
                 favImage.setImageResource(R.drawable.fav_no);
-            } else {
-                favData.addData(bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
+            }
+
+
+            if (flag[0] == 0) {
+                Log.d("CHECKING T", String.valueOf(t[0]));
+
+                if (t[0] == 0)
+                    favData.addData(bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
 
             }
             ImageView delete;
@@ -113,6 +132,7 @@ Log.d("StringingFav", String.valueOf(favData.staring(bvar.getId())));
                 @Override
                 public void onClick(View v) {
                     int id = bvar.getId();
+                    favData.deleteData(id);
                     database.deleteData(id);
                     blist.remove(position);
                     notifyDataSetChanged();

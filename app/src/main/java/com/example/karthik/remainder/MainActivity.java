@@ -6,14 +6,20 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
@@ -29,21 +35,32 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Date;
+
+import static com.example.karthik.remainder.R.id.imageView;
 
 public class MainActivity extends AppCompatActivity {
-    Button button,exp;
+    Button button, exp;
     TabLayout tab;
     FloatingActionButton fab;
     EditText edit;
     ViewPager viewPager;
-Window window;
+    DrawerLayout mDrawerLayout;
+    NavigationView navigationView;
+    Window window;
+    ImageView imageView;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.my_menu, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -52,44 +69,13 @@ Window window;
             startActivity(intent);
             return true;
         }
+        if (item.getItemId() == android.R.id.home) {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
+
         return true;
     }
-
-    TextWatcher tw = new TextWatcher() {
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-            if (!s.toString().matches("^\\$(\\d{1,3}(\\,\\d{3})*|(\\d+))(\\.\\d{2})?$")) {
-                String userInput = "" + s.toString().replaceAll("[^\\d]", "");
-                StringBuilder cashAmountBuilder = new StringBuilder(userInput);
-
-                while (cashAmountBuilder.length() > 3 && cashAmountBuilder.charAt(0) == '0') {
-                    cashAmountBuilder.deleteCharAt(0);
-                }
-                while (cashAmountBuilder.length() < 3) {
-                    cashAmountBuilder.insert(0, '0');
-                }
-                cashAmountBuilder.insert(cashAmountBuilder.length() - 2, '.');
-
-                edit.removeTextChangedListener(this);
-                edit.setText(cashAmountBuilder.toString());
-
-                edit.setTextKeepState("$" + cashAmountBuilder.toString());
-                Selection.setSelection(edit.getText(), cashAmountBuilder.toString().length() + 1);
-
-                edit.addTextChangedListener(this);
-            }
-        }
-    };
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -97,14 +83,57 @@ Window window;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         window = getWindow();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
+        navigationView = (NavigationView) findViewById(R.id.nView);
+        View header = navigationView.getHeaderView(0);
+        TextView textView = (TextView) header.findViewById(R.id.nav_header_textView);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE");
+        Date d = new Date();
+        int date = calendar.get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat month_date = new SimpleDateFormat("MMM");
+        String month_name = month_date.format(calendar.getTime());
+        String dayOfTheWeek = sdf.format(d);
+        textView.setText(dayOfTheWeek + ",  " + date + month_name);
+        imageView = (ImageView) header.findViewById(R.id.nav_header_imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_LONG).show();
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.nav_item_delete) {
+                    Intent intent = new Intent(MainActivity.this, DeleteActivity.class);
+                    startActivity(intent);
+                }
+                if (id == R.id.nav_item_three) {
+                    Intent intent = new Intent(MainActivity.this, Settings.class);
+                    startActivity(intent);
+                }
+                item.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                return true;
+            }
+        });
+
+
         window.setStatusBarColor(Color.parseColor("#045A70"));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
         exp = (Button) findViewById(R.id.expButton);
         exp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ExpActivity.class);
+                Intent intent = new Intent(MainActivity.this, ExpActivity.class);
                 startActivity(intent);
             }
         });
