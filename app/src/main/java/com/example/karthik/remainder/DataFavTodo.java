@@ -10,26 +10,24 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 /**
- * Created by karthik on 13-07-2018.
+ * Created by karthik on 15-07-2018.
  */
 
-public class DataFavouriteBuss extends SQLiteOpenHelper {
-    private static final String database_name = "favbussinessPayData";
-    private static final String table_name = "favpayDetails";
+public class DataFavTodo extends SQLiteOpenHelper {
+    private static final String database_name = "ftodoDatabase";
+    private static final String table_name = "ftodoData";
     private static final String Col1 = "_id";
-    private static final String Col2 = "name";
+    private static final String Col2 = "task";
     private static final String Col3 = "date";
     private static final String Col4 = "time";
-    private static final String Col5 = "paid";
-    private static final String Col6 = "due";
 
-    public DataFavouriteBuss(Context context) {
+    public DataFavTodo(Context context) {
         super(context, database_name, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + table_name + "(" + Col1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + Col2 + " VARCHAR(255)," + Col3 + " VARCHAR(255)," + Col4 + " VARCHAR(255)," + Col5 + " VARCHAR(255)," + Col6 + " VARCHAR(255)) ;");
+        db.execSQL("CREATE TABLE " + table_name + "(" + Col1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + Col2 + " VARCHAR(255)," + Col3 + " VARCHAR(255)," + Col4 + " VARCHAR(255)) ;");
 
     }
 
@@ -38,15 +36,13 @@ public class DataFavouriteBuss extends SQLiteOpenHelper {
 
     }
 
-    public void addData(int id, String name, String date, String time, String paid, String due) {
+    public void addData(int id, String task, String date, String time) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col1, id);
-        contentValues.put(Col2, name);
+        contentValues.put(Col2, task);
         contentValues.put(Col3, date);
         contentValues.put(Col4, time);
-        contentValues.put(Col5, paid);
-        contentValues.put(Col6, due);
         database.insert(table_name, null, contentValues);
     }
 

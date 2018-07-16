@@ -53,13 +53,11 @@
         android:id="@+id/delete"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignLeft="@+id/listTodoDate"
-        android:layout_alignStart="@+id/listTodoDate"
-        android:layout_alignTop="@+id/listTodoTask"
-        android:layout_marginLeft="65dp"
-        android:layout_marginStart="65dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/trash" />
+        app:srcCompat="@drawable/trash"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -80,4 +78,14 @@
         android:layout_toLeftOf="@+id/listTodoTime"
         android:layout_toStartOf="@+id/listTodoTime"
         app:srcCompat="@drawable/clock" />
+
+    <ImageView
+        android:id="@+id/fav_todo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/fav_no"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/listTodoDate"
+        android:layout_alignLeft="@+id/delete"
+        android:layout_alignStart="@+id/delete" />
 </RelativeLayout>

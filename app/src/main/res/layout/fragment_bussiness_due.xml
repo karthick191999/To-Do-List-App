@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="Time deadline"
+            android:text="00:00"
             android:textSize="20sp" />
 
     </LinearLayout>

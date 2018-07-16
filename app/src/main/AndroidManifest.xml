@@ -23,7 +23,9 @@
         <activity android:name=".CalendarActivity" />
         <activity android:name=".DeleteActivity" />
         <activity android:name=".Main2Activity" />
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings" />
+        <activity android:name=".DeleteTodoList" />
+        <activity android:name=".DeletedBusssList"></activity>
     </application>
 
 </manifest>

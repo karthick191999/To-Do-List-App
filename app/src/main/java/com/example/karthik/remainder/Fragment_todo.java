@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ public class Fragment_todo extends Fragment {
     Database_Todo database;
     Button add;
     CheckBox vimp, imp, limp;
+    FloatingActionButton fab;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
@@ -42,6 +44,7 @@ public class Fragment_todo extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_todo, container, false);
         final String rDate = Idate;
+        fab = (FloatingActionButton) view.findViewById(R.id.addFab);
         vimp = (CheckBox) view.findViewById(R.id.checkvImportant);
         imp = (CheckBox) view.findViewById(R.id.checkImportant);
         limp = (CheckBox) view.findViewById(R.id.checklImportant);
@@ -106,7 +109,7 @@ public class Fragment_todo extends Fragment {
         final String[] dtask = new String[1];
         final String[] ddate = new String[1];
         final String[] dtime = new String[1];
-        add.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dtask[0] = input.getText().toString();

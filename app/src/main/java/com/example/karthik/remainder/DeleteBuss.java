@@ -5,17 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
 
 /**
- * Created by karthik on 09-07-2018.
+ * Created by karthik on 15-07-2018.
  */
 
-public class DatabaseBussinessPay extends SQLiteOpenHelper {
-    private static final String database_name = "bussinessPayData";
-    private static final String table_name = "payDetails";
+public class DeleteBuss extends SQLiteOpenHelper {
+    private static final String database_name = "dbussinessPayData";
+    private static final String table_name = "dpayDetails";
     private static final String Col1 = "_id";
     private static final String Col2 = "name";
     private static final String Col3 = "date";
@@ -24,15 +21,14 @@ public class DatabaseBussinessPay extends SQLiteOpenHelper {
     private static final String Col6 = "due";
 
 
-    public DatabaseBussinessPay(Context context) {
+    public DeleteBuss(Context context) {
         super(context, database_name, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //
-
         db.execSQL("CREATE TABLE " + table_name + "(" + Col1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + Col2 + " VARCHAR(255)," + Col3 + " VARCHAR(255)," + Col4 + " VARCHAR(255)," + Col5 + " VARCHAR(255)," + Col6 + " VARCHAR(255)) ;");
+
     }
 
     @Override
@@ -57,12 +53,6 @@ public class DatabaseBussinessPay extends SQLiteOpenHelper {
         return cursor;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public Cursor searchData(String s) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from " + table_name + " where " + Col2 + "=?", new String[]{s}, null);
-        return cursor;
-    }
 
     public void deleteData(int id) {
 
@@ -70,13 +60,5 @@ public class DatabaseBussinessPay extends SQLiteOpenHelper {
         db.delete(table_name, Col1 + "=" + id, null);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public boolean staring(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from " + table_name + " where " + Col1 + " = ? ", new String[]{String.valueOf(id)}, null);
-        if (cursor == null)
-            return false;
-        else return true;
-    }
 
 }

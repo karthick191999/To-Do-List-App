@@ -28,6 +28,7 @@ import java.util.List;
 
 public class FragmentB extends android.support.v4.app.Fragment {
     ListView list;
+    DeleteBuss bussD;
     DatabaseBussinessPay database;
     DataFavouriteBuss favData;
     ArrayList<BussinesspayClass> blist = new ArrayList<>();
@@ -37,6 +38,7 @@ public class FragmentB extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_b, container, false);
         database = new DatabaseBussinessPay(getActivity());
+        bussD = new DeleteBuss(getActivity());
         favData = new DataFavouriteBuss(getActivity());
         list = (ListView) view.findViewById(R.id.bussinessList);
         Cursor data = database.getData();
@@ -64,21 +66,22 @@ public class FragmentB extends android.support.v4.app.Fragment {
             final int[] flag = {0};
             final int[] t = {0};
             final BussinesspayClass bvar = getItem(position);
+            Log.d("Checking iD", String.valueOf(bvar.getId()));
             if (row == null) {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 row = inflater.inflate(R.layout.bussinesspay_singlerow, parent, false);
             }
             final ImageView favImage = (ImageView) row.findViewById(R.id.favourite);
 
-            Log.d("StringingFav", String.valueOf(favData.staring(bvar.getId())));
 
             if (checked[position]) {
                 favImage.setImageResource(R.drawable.fav_yes);
             } else {
-                t[0] = 1;
+
                 favImage.setImageResource(R.drawable.fav_no);
             }
             if (favData.staring(bvar.getId())) {
+               // Log.d("Starring", "yeah");
                 favImage.setImageResource(R.drawable.fav_yes);
                 checked[position] = true;
             }
@@ -88,51 +91,48 @@ public class FragmentB extends android.support.v4.app.Fragment {
                 public void onClick(View v) {
                     int id = bvar.getId();
                     if (checked[position]) {
-                        favData.deleteData(bvar.getId());
+
+                        favData.deleteData(id);
                         favImage.setImageResource(R.drawable.fav_no);
                         checked[position] = false;
                     } else {
-                        favData.addData(bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
+                        favData.addData(bvar.getId(), bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
+                    //    Log.d("Message", "Added" + bvar.getName());
                         favImage.setImageResource(R.drawable.fav_yes);
                         checked[position] = true;
-                        t[0] = 0;
-                    }
-                    if (favData.staring(id)) {
-                        flag[0] = 1;
-                    }
-                    Log.d("Value of flag", String.valueOf(flag[0]));
-                    if (flag[0] == 0) {
-                        Log.d("CHECKING T", String.valueOf(t[0]));
+                      //  Log.d("TRUR", String.valueOf(favData.staring(bvar.getId())));
 
-                        if (t[0] == 0)
+                    }
+                 /*   if (favData.staring(id)) {
+                        flag[0] = 1;
+                    } else
+                        t[0] = 1;
+
+                    if (flag[0] == 1) {
+                        favData.deleteData(bvar.getId());
+                        flag[0] = 0;
+                        favImage.setImageResource(R.drawable.fav_no);
+                    }
+
+
+                    if (flag[0] == 0) {
+                        Log.d("Message", "Added");
                             favData.addData(bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
 
-                    }
+                    }*/
                 }
             });
-            Log.d("Value of flag outside", String.valueOf(flag[0]));
-           if (flag[0] == 1) {
-                favData.deleteData(bvar.getId());
-                flag[0] = 0;
-
-                favImage.setImageResource(R.drawable.fav_no);
-            }
 
 
-            if (flag[0] == 0) {
-                Log.d("CHECKING T", String.valueOf(t[0]));
-
-                if (t[0] == 0)
-                    favData.addData(bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
-
-            }
             ImageView delete;
             delete = (ImageView) row.findViewById(R.id.bussiness_delete);
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    bussD.addData(bvar.getName(), bvar.getDate(), bvar.getTime(), bvar.getPaid(), bvar.getDue());
                     int id = bvar.getId();
-                    favData.deleteData(id);
+                    Log.d("Checking iD", String.valueOf(id));
                     database.deleteData(id);
                     blist.remove(position);
                     notifyDataSetChanged();

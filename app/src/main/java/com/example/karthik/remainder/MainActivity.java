@@ -129,14 +129,14 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
-        exp = (Button) findViewById(R.id.expButton);
+      /*  exp = (Button) findViewById(R.id.expButton);
         exp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ExpActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
         getSupportActionBar().setTitle("DashBoard");
         viewPager = (ViewPager) findViewById(R.id.myPager);
         //edit = (EditText) findViewById(R.id.tryC);

@@ -49,5 +49,10 @@ public class DeleteTodo extends SQLiteOpenHelper{
         return cursor;
     }
 
+    public void deleteData(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(table_name, Col1 + "=" + id, null);
+    }
 
 }

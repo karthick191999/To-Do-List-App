@@ -13,14 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textStyle="bold"
+        android:textColor="#000000"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/listBdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="21dp"
-        android:layout_marginStart="21dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:text="TextView"
         android:textSize="20sp"
         android:layout_alignTop="@+id/imageView5"
@@ -31,11 +33,11 @@
         android:id="@+id/listBtime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
         android:text="TextView"
         android:textSize="20sp"
-        android:layout_alignBottom="@+id/imageView6"
+        android:layout_alignTop="@+id/imageView6"
         android:layout_toRightOf="@+id/imageView6"
         android:layout_toEndOf="@+id/imageView6" />
 
@@ -73,12 +75,12 @@
         android:id="@+id/imageView6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignBottom="@+id/listBdate"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/listBdate"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        app:srcCompat="@drawable/clock"
+        android:layout_alignTop="@+id/listBdate"
         android:layout_toRightOf="@+id/listBdate"
-        app:srcCompat="@drawable/clock" />
+        android:layout_toEndOf="@+id/listBdate" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -103,7 +105,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:srcCompat="@drawable/trash"
-        android:layout_below="@+id/listBname"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -111,9 +113,9 @@
         android:id="@+id/favourite"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignLeft="@+id/bussiness_delete"
-        android:layout_alignStart="@+id/bussiness_delete"
-        android:layout_below="@+id/imageView7"
-        app:srcCompat="@drawable/fav_no" />
+        app:srcCompat="@drawable/fav_no"
+        android:layout_alignBottom="@+id/listBdue"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

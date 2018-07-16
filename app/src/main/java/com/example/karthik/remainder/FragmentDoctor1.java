@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.Selection;
@@ -38,6 +39,7 @@ public class FragmentDoctor1 extends android.app.Fragment {
     EditText name;
     Button add;
     EditText editText;
+    FloatingActionButton fab;
     DatabaseBussinessPay database;
     TextWatcher tw = new TextWatcher() {
 
@@ -81,6 +83,7 @@ public class FragmentDoctor1 extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bussiness_due, container, false);
         database = new DatabaseBussinessPay(getActivity());
+       fab = (FloatingActionButton) view.findViewById(R.id.bussfab);
         paid = (TextView) view.findViewById(R.id.paidMoney);
         due = (TextView) view.findViewById(R.id.dueMoney);
         time = (TextView) view.findViewById(R.id.time);
@@ -199,7 +202,7 @@ public class FragmentDoctor1 extends android.app.Fragment {
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String dname = name.getText().toString();

@@ -3,15 +3,20 @@ package com.example.karthik.remainder;
 import android.app.Fragment;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,16 +29,20 @@ import java.util.List;
 
 public class FragmentA extends android.support.v4.app.Fragment {
     ListView list;
+    LinearLayout layout;
     ArrayList<TodoClass> tlist = new ArrayList<>();
     Database_Todo database;
     DeleteTodo todoDatabase;
+    DataFavTodo favTodo;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_a, container, false);
+        layout = (LinearLayout) view.findViewById(R.id.fragaId);
         list = (ListView) view.findViewById(R.id.todo_list);
+        favTodo = new DataFavTodo(getActivity());
         database = new Database_Todo(getActivity());
         todoDatabase = new DeleteTodo(getActivity());
         Cursor data = database.getData();
@@ -42,6 +51,10 @@ public class FragmentA extends android.support.v4.app.Fragment {
         }
         toDoAdapter adapter = new toDoAdapter(getActivity(), R.layout.todo_singlerow, tlist);
         list.setAdapter(adapter);
+        Log.d("Listing", String.valueOf(list));
+        if (list.getAdapter().getCount() == 0) {
+            layout.setBackgroundResource(R.drawable.editbacktodo);
+        }
         return view;
 
     }
@@ -52,8 +65,9 @@ public class FragmentA extends android.support.v4.app.Fragment {
             super(context, resource, objects);
         }
 
+        boolean checked[] = new boolean[20];
 
-
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @NonNull
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -63,6 +77,38 @@ public class FragmentA extends android.support.v4.app.Fragment {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 row = inflater.inflate(R.layout.todo_singlerow, parent, false);
             }
+            final ImageView fav = (ImageView) row.findViewById(R.id.fav_todo);
+
+            if (checked[position]) {
+                fav.setImageResource(R.drawable.fav_yes);
+            } else {
+
+                fav.setImageResource(R.drawable.fav_no);
+            }
+            if (favTodo.staring(todo.getId())) {
+                Log.d("Starring", "yeah");
+                fav.setImageResource(R.drawable.fav_yes);
+                checked[position] = true;
+            }
+
+            fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int id = todo.getId();
+                    if (checked[position]) {
+
+                        favTodo.deleteData(id);
+                        fav.setImageResource(R.drawable.fav_no);
+                        checked[position] = false;
+                    } else {
+                        favTodo.addData(todo.getId(), todo.getTask(), todo.getDate(), todo.getTime());
+                        fav.setImageResource(R.drawable.fav_yes);
+                        checked[position] = true;
+
+
+                    }
+                }
+            });
             ImageButton delete = (ImageButton) row.findViewById(R.id.delete);
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override

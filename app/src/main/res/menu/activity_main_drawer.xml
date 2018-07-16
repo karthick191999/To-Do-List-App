@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
-        <item android:id="@+id/nav_item_delete"
+        <item
+            android:id="@+id/nav_item_delete"
             android:icon="@drawable/ndelete"
-            android:title="Delete" />
-        <item android:id="@+id/nav_item_two"
-            android:icon="@drawable/date1"
-            android:title="Item 2" />
-        <item android:id="@+id/nav_item_three"
+            android:title="Deleted Items" />
+        <item
+            android:id="@+id/nav_item_favourite"
+            android:icon="@drawable/navfav"
+            android:title="Favourite Items" />
+        <item
+            android:id="@+id/nav_item_three"
             android:icon="@drawable/calendar"
             android:title="Settings" />
     </group>
 
     <group android:id="@+id/group_menu">
-        <item android:id="@+id/nav_item_four"
+        <item
+            android:id="@+id/nav_item_four"
             android:title="Item 4" />
-        <item android:id="@+id/nav_item_five"
+        <item
+            android:id="@+id/nav_item_five"
             android:title="Item 5" />
     </group>
 
     <item android:title="Title 1">
         <menu>
-            <item android:id="@+id/nav_item_six"
+            <item
+                android:id="@+id/nav_item_six"
                 android:icon="@drawable/clock"
                 android:title="Item 6" />
-            <item android:id="@+id/nav_item_seven"
+            <item
+                android:id="@+id/nav_item_seven"
                 android:icon="@drawable/search"
                 android:title="Item 7" />
         </menu>
