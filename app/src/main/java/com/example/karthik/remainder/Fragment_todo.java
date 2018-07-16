@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -51,7 +52,7 @@ public class Fragment_todo extends Fragment {
         date = (TextView) view.findViewById(R.id.date);
         time = (TextView) view.findViewById(R.id.time);
         database = new Database_Todo(getActivity());
-        add = (Button) view.findViewById(R.id.todoAdd);
+        // add = (Button) view.findViewById(R.id.todoAdd);
         calender = Calendar.getInstance();
         if (rDate != null) {
             date.setText(rDate);
@@ -61,6 +62,35 @@ public class Fragment_todo extends Fragment {
             int year = calender.get(Calendar.YEAR);
             date.setText(days + "/" + month + "/" + year);
         }
+        vimp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (vimp.isChecked()) {
+                    limp.setChecked(false);
+                    imp.setChecked(false);
+                }
+            }
+        });
+
+
+        imp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (imp.isChecked()) {
+                    limp.setChecked(false);
+                    vimp.setChecked(false);
+                }
+            }
+        });
+        limp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (limp.isChecked()) {
+                    vimp.setChecked(false);
+                    imp.setChecked(false);
+                }
+            }
+        });
 
         input = (EditText) view.findViewById(R.id.todoInput);
         timeL = (LinearLayout) view.findViewById(R.id.timeLayout);
@@ -109,13 +139,26 @@ public class Fragment_todo extends Fragment {
         final String[] dtask = new String[1];
         final String[] ddate = new String[1];
         final String[] dtime = new String[1];
+        final String[] color = new String[1];
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (vimp.isChecked()) {
+                    color[0] = "red";
+                    Log.d("Get the colour",color[0]);
+                }
+                if (imp.isChecked()) {
+                    color[0] = "yellow";
+                    Log.d("Get the colour",color[0]);
+                }
+                if (limp.isChecked()) {
+                    color[0] = "green";
+                    Log.d("Get the colour",color[0]);
+                }
                 dtask[0] = input.getText().toString();
                 ddate[0] = date.getText().toString();
                 dtime[0] = time.getText().toString();
-                database.addData(dtask[0], ddate[0], dtime[0]);
+                database.addData(dtask[0], ddate[0], dtime[0], color[0]);
 
             }
         });

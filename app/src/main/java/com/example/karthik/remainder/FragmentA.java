@@ -3,6 +3,7 @@ package com.example.karthik.remainder;
 import android.app.Fragment;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -47,7 +48,7 @@ public class FragmentA extends android.support.v4.app.Fragment {
         todoDatabase = new DeleteTodo(getActivity());
         Cursor data = database.getData();
         while (data.moveToNext()) {
-            tlist.add(new TodoClass(data.getInt(0), data.getString(1), data.getString(2), data.getString(3)));
+            tlist.add(new TodoClass(data.getInt(0), data.getString(1), data.getString(2), data.getString(3), data.getString(4)));
         }
         toDoAdapter adapter = new toDoAdapter(getActivity(), R.layout.todo_singlerow, tlist);
         list.setAdapter(adapter);
@@ -101,7 +102,7 @@ public class FragmentA extends android.support.v4.app.Fragment {
                         fav.setImageResource(R.drawable.fav_no);
                         checked[position] = false;
                     } else {
-                        favTodo.addData(todo.getId(), todo.getTask(), todo.getDate(), todo.getTime());
+                        favTodo.addData(todo.getId(), todo.getTask(), todo.getDate(), todo.getTime(),todo.getColour());
                         fav.setImageResource(R.drawable.fav_yes);
                         checked[position] = true;
 
@@ -113,7 +114,7 @@ public class FragmentA extends android.support.v4.app.Fragment {
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    todoDatabase.addData(todo.getTask(), todo.getDate(), todo.getTime());
+                    todoDatabase.addData(todo.getTask(), todo.getDate(), todo.getTime(), todo.getColour());
                     int id = todo.getId();
                     database.deleteData(id);
                     tlist.remove(position);
@@ -124,7 +125,18 @@ public class FragmentA extends android.support.v4.app.Fragment {
             task = (TextView) row.findViewById(R.id.listTodoTask);
             date = (TextView) row.findViewById(R.id.listTodoDate);
             time = (TextView) row.findViewById(R.id.listTodoTime);
+            String colour = todo.getColour();
+            Log.d("Finding the colour", colour);
             task.setText(todo.getTask());
+            if (colour.trim().equalsIgnoreCase("red".trim())) {
+                task.setTextColor(Color.parseColor("#EE3C00"));
+            }
+            if (colour.trim().equalsIgnoreCase("yellow".trim())) {
+                task.setTextColor(Color.parseColor("#EEC900"));
+            }
+            if (colour.trim().equalsIgnoreCase("green".trim())) {
+                task.setTextColor(Color.parseColor("#38EE00"));
+            }
             date.setText(todo.getDate());
             time.setText(todo.getTime());
             return row;

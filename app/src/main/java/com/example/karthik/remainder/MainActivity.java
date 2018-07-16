@@ -42,6 +42,7 @@ import android.widget.Toast;
 import java.util.Date;
 
 import static com.example.karthik.remainder.R.id.imageView;
+import static com.example.karthik.remainder.R.id.nav_item_favourite;
 
 public class MainActivity extends AppCompatActivity {
     Button button, exp;
@@ -110,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 if (id == R.id.nav_item_delete) {
                     Intent intent = new Intent(MainActivity.this, DeleteActivity.class);
+                    startActivity(intent);
+                }
+                if (id == nav_item_favourite){
+                    Intent intent  = new Intent (MainActivity.this,FavsActivity.class);
                     startActivity(intent);
                 }
                 if (id == R.id.nav_item_three) {

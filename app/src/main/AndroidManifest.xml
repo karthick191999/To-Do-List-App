@@ -24,8 +24,7 @@
         <activity android:name=".DeleteActivity" />
         <activity android:name=".Main2Activity" />
         <activity android:name=".Settings" />
-        <activity android:name=".DeleteTodoList" />
-        <activity android:name=".DeletedBusssList"></activity>
+        <activity android:name=".FavsActivity"></activity>
     </application>
 
 </manifest>

@@ -9,12 +9,22 @@ public class TodoClass {
     int id;
     String date;
     String time;
+    String colour;
 
-    public TodoClass(int id, String task, String date, String time) {
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public TodoClass(int id, String task, String date, String time, String colour) {
         this.task = task;
         this.date = date;
         this.time = time;
         this.id = id;
+        this.colour = colour;
     }
 
     public String getTask() {

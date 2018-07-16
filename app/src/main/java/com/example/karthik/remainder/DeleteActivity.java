@@ -2,6 +2,7 @@ package com.example.karthik.remainder;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -46,7 +47,7 @@ public class DeleteActivity extends AppCompatActivity {
         Cursor data = otodo.getData();
         if (data.getCount() != 0) {
             while (data.moveToNext()) {
-                tlist.add(new TodoClass(data.getInt(0), data.getString(1), data.getString(2), data.getString(3)));
+                tlist.add(new TodoClass(data.getInt(0), data.getString(1), data.getString(2), data.getString(3), data.getString(4)));
             }
         }
         Cursor mdata = bussD.getData();
@@ -129,8 +130,19 @@ public class DeleteActivity extends AppCompatActivity {
                     notifyDataSetChanged();
                 }
             });
+            String colour = todo.getColour();
             TextView task, date, time;
             task = (TextView) row.findViewById(R.id.listTodoTask);
+            task.setText(todo.getTask());
+            if (colour.trim().equalsIgnoreCase("red".trim())) {
+                task.setTextColor(Color.parseColor("#EE3C00"));
+            }
+            if (colour.trim().equalsIgnoreCase("yellow".trim())) {
+                task.setTextColor(Color.parseColor("#EEC900"));
+            }
+            if (colour.trim().equalsIgnoreCase("green".trim())) {
+                task.setTextColor(Color.parseColor("#38EE00"));
+            }
             date = (TextView) row.findViewById(R.id.listTodoDate);
             time = (TextView) row.findViewById(R.id.listTodoTime);
             task.setText(todo.getTask());

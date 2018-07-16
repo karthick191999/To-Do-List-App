@@ -106,7 +106,7 @@ public class FragmentDoctor1 extends android.app.Fragment {
         dueL = (LinearLayout) view.findViewById(R.id.dueL);
         timeL = (LinearLayout) view.findViewById(R.id.timeLayout);
         dateL = (LinearLayout) view.findViewById(R.id.dateLayout);
-        add = (Button) view.findViewById(R.id.bussinessAdd);
+      //  add = (Button) view.findViewById(R.id.bussinessAdd);
         dateL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

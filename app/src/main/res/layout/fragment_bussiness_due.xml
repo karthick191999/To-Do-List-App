@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         app:layout_anchor="@id/tCollapsingLayout"
         app:layout_anchorGravity="bottom|end"
-        android:background="#FFFFFF"
-        app:srcCompat="@android:drawable/ic_input_add"
+        android:backgroundTint="#0896BB"
+        app:srcCompat="@drawable/tick"
         android:tint="@android:color/white" />
 
     <LinearLayout
@@ -171,11 +171,4 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/bussinessAdd"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:text="add" />
 </android.support.design.widget.CoordinatorLayout>

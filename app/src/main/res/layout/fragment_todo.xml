@@ -5,21 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/newLayout"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="#9D7A9E">
-
-        <EditText
-            android:id="@+id/todoInput"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:hint="Name" />
-
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/dateLayout"
@@ -120,13 +105,20 @@
             android:text="Less Important" />
     </LinearLayout>
 
-    <Button
-
-        android:id="@+id/todoAdd"
+    <LinearLayout
+        android:id="@+id/newLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:text="Add" />
+        android:layout_height="130dp"
+        android:background="#9D7A9E">
+
+        <EditText
+            android:id="@+id/todoInput"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:hint="Name" />
+
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addFab"
@@ -138,7 +130,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/tick"
         android:tint="#FFFFFF"
-      app:layout_anchor="@id/newLayout"
+        app:layout_anchor="@id/newLayout"
         app:layout_anchorGravity="bottom|end|right"
         />
 
