@@ -35,13 +35,13 @@ public class Database_Todo extends SQLiteOpenHelper {
 
     }
 
-    public void addData(String task, String date, String time,String colour) {
+    public void addData(String task, String date, String time, String colour) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col2, task);
         contentValues.put(Col3, date);
         contentValues.put(Col4, time);
-        contentValues.put(Col5,colour);
+        contentValues.put(Col5, colour);
         database.insert(table_name, null, contentValues);
     }
 
@@ -63,4 +63,10 @@ public class Database_Todo extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor dateNotify(String date) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cusor = db.rawQuery(" Select * from " + table_name + " where " + Col3 + " = ? ", new String[]{date}, null);
+        return cusor;
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,11 +27,14 @@
         android:id="@+id/bussfab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchor="@id/tCollapsingLayout"
-        app:layout_anchorGravity="bottom|end"
-        android:backgroundTint="#0896BB"
+
+        app:backgroundTint="#0896BB"
         app:srcCompat="@drawable/tick"
-        android:tint="@android:color/white" />
+        android:tint="@android:color/white"
+        android:layout_alignBottom="@+id/dateLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="81dp" />
 
     <LinearLayout
         android:id="@+id/dateLayout"
@@ -171,4 +174,4 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -111,7 +111,7 @@ public class FavsActivity extends AppCompatActivity {
             if (colour.trim().equalsIgnoreCase("yellow".trim())) {
                 holder.task.setTextColor(Color.parseColor("#EEC900"));
             }
-            if (colour.trim().equalsIgnoreCase("green".trim())) {
+            if (colour.trim().equalsIgnoreCase(("green").trim())) {
                 holder.task.setTextColor(Color.parseColor("#38EE00"));
             }
             holder.task.setText(todoItem.getTask());

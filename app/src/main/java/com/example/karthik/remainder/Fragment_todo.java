@@ -1,8 +1,12 @@
 package com.example.karthik.remainder;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +25,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import static com.example.karthik.remainder.Input.Idate;
 
@@ -35,16 +40,18 @@ public class Fragment_todo extends Fragment {
     Calendar calender;
     String amPm;
     Database_Todo database;
-    Button add;
+
     CheckBox vimp, imp, limp;
     FloatingActionButton fab;
+    Calendar calendar1;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_todo, container, false);
+        final View view = inflater.inflate(R.layout.fragment_todo, container, false);
         final String rDate = Idate;
+        calendar1  = Calendar.getInstance();
         fab = (FloatingActionButton) view.findViewById(R.id.addFab);
         vimp = (CheckBox) view.findViewById(R.id.checkvImportant);
         imp = (CheckBox) view.findViewById(R.id.checkImportant);
@@ -104,6 +111,9 @@ public class Fragment_todo extends Fragment {
                 TimePickerDialog timePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        calendar1.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendar1.set(Calendar.MINUTE, minute);
+
                         if (hourOfDay >= 12)
                             amPm = "PM";
                         else
@@ -126,6 +136,7 @@ public class Fragment_todo extends Fragment {
                 final DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar1.set(year, month, dayOfMonth);
                         month = month + 1;
                         date.setText(dayOfMonth + "/" + month + "/" + year);
 
@@ -145,20 +156,38 @@ public class Fragment_todo extends Fragment {
             public void onClick(View v) {
                 if (vimp.isChecked()) {
                     color[0] = "red";
-                    Log.d("Get the colour",color[0]);
+                    Log.d("Get the colour", color[0]);
                 }
                 if (imp.isChecked()) {
                     color[0] = "yellow";
-                    Log.d("Get the colour",color[0]);
+                    Log.d("Get the colour", color[0]);
                 }
                 if (limp.isChecked()) {
                     color[0] = "green";
-                    Log.d("Get the colour",color[0]);
+                    Log.d("Get the colour", color[0]);
                 }
-                dtask[0] = input.getText().toString();
-                ddate[0] = date.getText().toString();
-                dtime[0] = time.getText().toString();
-                database.addData(dtask[0], ddate[0], dtime[0], color[0]);
+                Log.d("Limp", String.valueOf(limp.isChecked()));
+                Log.d("vimp", String.valueOf(vimp.isChecked()));
+                Log.d("imp", String.valueOf(imp.isChecked()));
+               // if (limp.isChecked() || vimp.isChecked() || imp.isChecked())
+              //      Toast.makeText(getActivity(), "Give Some pref", Toast.LENGTH_SHORT).show();
+
+
+                    dtask[0] = input.getText().toString();
+                    ddate[0] = date.getText().toString();
+                    dtime[0] = time.getText().toString();
+
+
+                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                    Intent newIntent = new Intent(getActivity(), AlarmReciever.class);
+                    newIntent.putExtra("Date", ddate[0]);
+                    newIntent.putExtra("Time", dtime[0]);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, newIntent, 0);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar1.getTimeInMillis(), pendingIntent);
+                    database.addData(dtask[0], ddate[0], dtime[0], color[0]);
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+
 
             }
         });

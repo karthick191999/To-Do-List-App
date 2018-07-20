@@ -40,6 +40,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import static com.example.karthik.remainder.R.id.imageView;
 import static com.example.karthik.remainder.R.id.nav_item_favourite;
@@ -54,6 +56,27 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     Window window;
     ImageView imageView;
+
+
+    private static final int TIME_INTERVAL = 1000;
+    private long mBackPressed;
+
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+
+
+        }
+
+        mBackPressed = System.currentTimeMillis();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, DeleteActivity.class);
                     startActivity(intent);
                 }
-                if (id == nav_item_favourite){
-                    Intent intent  = new Intent (MainActivity.this,FavsActivity.class);
+                if (id == nav_item_favourite) {
+                    Intent intent = new Intent(MainActivity.this, FavsActivity.class);
                     startActivity(intent);
                 }
                 if (id == R.id.nav_item_three) {
@@ -157,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Input.class);
                 startActivity(intent);
-                notifications();
+              //  notifications();
             }
         });
 
@@ -207,6 +230,5 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
 
 }

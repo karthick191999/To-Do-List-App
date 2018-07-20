@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.icu.text.NumberFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -83,7 +84,7 @@ public class FragmentDoctor1 extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bussiness_due, container, false);
         database = new DatabaseBussinessPay(getActivity());
-       fab = (FloatingActionButton) view.findViewById(R.id.bussfab);
+        fab = (FloatingActionButton) view.findViewById(R.id.bussfab);
         paid = (TextView) view.findViewById(R.id.paidMoney);
         due = (TextView) view.findViewById(R.id.dueMoney);
         time = (TextView) view.findViewById(R.id.time);
@@ -93,8 +94,7 @@ public class FragmentDoctor1 extends android.app.Fragment {
         String rDate = Idate;
         if (rDate != null) {
             date.setText(rDate);
-        }
-        else {
+        } else {
             int days = calendar.get(Calendar.DAY_OF_MONTH);
             int month = calendar.get(Calendar.MONTH);
             int year = calendar.get(Calendar.YEAR);
@@ -106,7 +106,7 @@ public class FragmentDoctor1 extends android.app.Fragment {
         dueL = (LinearLayout) view.findViewById(R.id.dueL);
         timeL = (LinearLayout) view.findViewById(R.id.timeLayout);
         dateL = (LinearLayout) view.findViewById(R.id.dateLayout);
-      //  add = (Button) view.findViewById(R.id.bussinessAdd);
+        //  add = (Button) view.findViewById(R.id.bussinessAdd);
         dateL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +212,8 @@ public class FragmentDoctor1 extends android.app.Fragment {
                 String mDue = due.getText().toString();
 
                 database.addData(dname, dtime, ddate, mPaid, mDue);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
 

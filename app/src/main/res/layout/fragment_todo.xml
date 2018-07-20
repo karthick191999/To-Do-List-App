@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,7 +35,6 @@
 
         <TextView
             android:id="@+id/date"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -115,7 +115,7 @@
             android:id="@+id/todoInput"
             android:layout_width="match_parent"
             android:layout_height="66dp"
-            android:hint="Name" />
+            android:hint="Remaind me too ..." />
 
 
     </LinearLayout>
@@ -125,13 +125,13 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:backgroundTint="#9D7A9E"
+        android:layout_alignBottom="@+id/dateLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="100dp"
         android:scaleType="fitXY"
         android:src="@drawable/tick"
         android:tint="#FFFFFF"
-        app:layout_anchor="@id/newLayout"
-        app:layout_anchorGravity="bottom|end|right"
-        />
+        app:backgroundTint="#9D7A9E" />
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

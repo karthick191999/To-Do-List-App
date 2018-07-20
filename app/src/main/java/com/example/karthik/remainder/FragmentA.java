@@ -1,6 +1,7 @@
 package com.example.karthik.remainder;
 
-import android.app.Fragment;
+import
+        android.app.Fragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -126,7 +127,6 @@ public class FragmentA extends android.support.v4.app.Fragment {
             date = (TextView) row.findViewById(R.id.listTodoDate);
             time = (TextView) row.findViewById(R.id.listTodoTime);
             String colour = todo.getColour();
-            Log.d("Finding the colour", colour);
             task.setText(todo.getTask());
             if (colour.trim().equalsIgnoreCase("red".trim())) {
                 task.setTextColor(Color.parseColor("#EE3C00"));
