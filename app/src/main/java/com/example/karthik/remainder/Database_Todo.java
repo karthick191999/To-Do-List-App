@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 /**
  * Created by karthik on 06-07-2018.
@@ -63,10 +64,10 @@ public class Database_Todo extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor dateNotify(String date) {
-
+    public Cursor dateNotify(String date, String time) {
+        Log.d("DateDatta", time);
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cusor = db.rawQuery(" Select * from " + table_name + " where " + Col3 + " = ? ", new String[]{date}, null);
+        Cursor cusor = db.rawQuery(" Select * from " + table_name + " where " + Col3 + " = ? AND " + Col4 + " = ? ", new String[]{date, time}, null);
         return cusor;
     }
 }

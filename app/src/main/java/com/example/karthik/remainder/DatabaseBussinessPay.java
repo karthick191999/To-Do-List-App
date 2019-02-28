@@ -78,5 +78,13 @@ public class DatabaseBussinessPay extends SQLiteOpenHelper {
             return false;
         else return true;
     }
+    public Cursor dateNotify(String date,String time) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cusor = db.rawQuery(" Select * from " + table_name + " where " + Col3 + " = ? and " + Col4 +" = ? ", new String[]{date,time}, null);
+        return cusor;
+    }
+
+
 
 }

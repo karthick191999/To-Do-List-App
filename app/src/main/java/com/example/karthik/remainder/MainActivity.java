@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTheme(R.style.AppTheme_Dark);
         window = getWindow();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         navigationView = (NavigationView) findViewById(R.id.nView);

@@ -44,14 +44,16 @@ public class Fragment_todo extends Fragment {
     CheckBox vimp, imp, limp;
     FloatingActionButton fab;
     Calendar calendar1;
+    int count = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
         final View view = inflater.inflate(R.layout.fragment_todo, container, false);
         final String rDate = Idate;
-        calendar1  = Calendar.getInstance();
+        calendar1 = Calendar.getInstance();
         fab = (FloatingActionButton) view.findViewById(R.id.addFab);
         vimp = (CheckBox) view.findViewById(R.id.checkvImportant);
         imp = (CheckBox) view.findViewById(R.id.checkImportant);
@@ -155,23 +157,26 @@ public class Fragment_todo extends Fragment {
             @Override
             public void onClick(View v) {
                 if (vimp.isChecked()) {
+                    count++;
                     color[0] = "red";
                     Log.d("Get the colour", color[0]);
                 }
                 if (imp.isChecked()) {
+                    count++;
                     color[0] = "yellow";
                     Log.d("Get the colour", color[0]);
                 }
                 if (limp.isChecked()) {
+                    count++;
                     color[0] = "green";
                     Log.d("Get the colour", color[0]);
                 }
                 Log.d("Limp", String.valueOf(limp.isChecked()));
                 Log.d("vimp", String.valueOf(vimp.isChecked()));
                 Log.d("imp", String.valueOf(imp.isChecked()));
-               // if (limp.isChecked() || vimp.isChecked() || imp.isChecked())
-              //      Toast.makeText(getActivity(), "Give Some pref", Toast.LENGTH_SHORT).show();
-
+                if (count == 0)
+                    Toast.makeText(getActivity(), "Give Some pref", Toast.LENGTH_SHORT).show();
+                else {
 
                     dtask[0] = input.getText().toString();
                     ddate[0] = date.getText().toString();
@@ -188,7 +193,7 @@ public class Fragment_todo extends Fragment {
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
 
-
+                }
             }
         });
 
